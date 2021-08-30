@@ -10,6 +10,7 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
+	"github.com/tducasse/ebiten-template/ldtk"
 )
 
 var errQuit = errors.New("quit")
@@ -21,6 +22,8 @@ type Game struct {
 var assetsFolder embed.FS
 
 var img *ebiten.Image
+
+var levels *ldtk.Ldtk
 
 func init() {
 	imgData, err := assetsFolder.ReadFile("assets/images/player.png")
@@ -34,6 +37,23 @@ func init() {
 	}
 
 	img = ebiten.NewImageFromImage(imgFile)
+
+	mapData, err := assetsFolder.ReadFile("assets/maps/sample.ldtk")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	levels, err = ldtk.Load(
+		mapData,
+		&ldtk.Options{
+			Aseprite:    true,
+			EmbedFolder: &assetsFolder,
+			FilePrefix:  "assets/maps",
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func (game *Game) Update() error {
@@ -44,7 +64,7 @@ func (game *Game) Update() error {
 }
 
 func (game *Game) Draw(screen *ebiten.Image) {
-	screen.DrawImage(img, nil)
+	levels.Draw(screen)
 }
 
 func (game *Game) Layout(w, h int) (int, int) { return 256, 144 }
