@@ -157,16 +157,3 @@ func (ldtkMap *Ldtk) Draw(screen *ebiten.Image) {
 		}
 	}
 }
-
-// for _, field := range levels.Levels[0].Layers[0].Entities[0].Fields {
-// 	if strings.HasPrefix(field.Type, "Array") {
-// 		myField, ok := field.Value.([]interface{})
-// 		if !ok {
-// 			log.Printf("nok")
-// 		} else {
-// 			log.Println(myField)
-// 		}
-// 	} else {
-// 		log.Println(field.Value)
-// 	}
-// }
