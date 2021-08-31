@@ -1,15 +1,14 @@
 package main
 
 import (
-	"bytes"
 	"embed"
 	"errors"
-	"image"
 	_ "image/png"
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
+	"github.com/tducasse/ebiten-template/entities"
 	"github.com/tducasse/ebiten-template/ldtk"
 )
 
@@ -21,50 +20,44 @@ type Game struct {
 //go:embed assets/*
 var assetsFolder embed.FS
 
-var img *ebiten.Image
-
 var levels *ldtk.Ldtk
 
+var player *entities.Player
+
 func init() {
-	imgData, err := assetsFolder.ReadFile("assets/images/player.png")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	imgFile, _, err := image.Decode(bytes.NewReader(imgData))
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	img = ebiten.NewImageFromImage(imgFile)
-
-	mapData, err := assetsFolder.ReadFile("assets/maps/sample.ldtk")
-	if err != nil {
-		log.Fatal(err)
-	}
-
+	var err error
 	levels, err = ldtk.Load(
-		mapData,
+		"sample.ldtk",
 		&ldtk.Options{
 			Aseprite:    true,
 			EmbedFolder: &assetsFolder,
-			FilePrefix:  "assets/maps",
+			Root:        "assets/maps",
 		},
 	)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	entityOptions := entities.EntityOptions{
+		EmbedFolder: &assetsFolder,
+		Root:        "assets/images",
+	}
+
+	player = new(entities.Player)
+	player.Init(levels, &entityOptions)
 }
 
 func (game *Game) Update() error {
 	if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 		return errQuit
 	}
+	player.Update()
 	return nil
 }
 
 func (game *Game) Draw(screen *ebiten.Image) {
 	levels.Draw(screen)
+	player.Draw(screen)
 }
 
 func (game *Game) Layout(w, h int) (int, int) { return 256, 144 }
