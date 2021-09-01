@@ -155,6 +155,9 @@ func (anim *Animation) SetTag(tag string) {
 		log.Println("Could not find tag " + tag)
 		return
 	}
+	if anim.CurrentTag.Name == tag {
+		return
+	}
 	anim.CurrentTag = anim.Tags[tag]
 	anim.CurrentFrameIdx = anim.CurrentTag.From
 	anim.CurrentFrame = anim.Frames[anim.CurrentFrameIdx]
