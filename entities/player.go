@@ -5,7 +5,6 @@ import (
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/tducasse/ebiten-template/aseprite"
 	"github.com/tducasse/ebiten-template/ldtk"
 )
@@ -29,7 +28,7 @@ func (p *Player) Init(levels *ldtk.Ldtk, opt *EntityOptions) {
 			EmbedFolder: opt.EmbedFolder,
 			Root:        opt.Root,
 		},
-		"walk",
+		"idle",
 		p,
 	)
 	p.Sprite.OnLoop(onAnimLoop)
@@ -46,10 +45,5 @@ func (p *Player) Draw(screen *ebiten.Image) {
 }
 
 func (p *Player) Update() {
-	if inpututil.IsKeyJustPressed(ebiten.KeyArrowUp) {
-		p.Sprite.SetTag("walk")
-	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowDown) {
-		p.Sprite.SetTag("red")
-	}
 	p.Sprite.Update()
 }
