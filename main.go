@@ -9,6 +9,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/tducasse/ebiten-template/entities"
+	"github.com/tducasse/ebiten-template/input"
 	"github.com/tducasse/ebiten-template/ldtk"
 )
 
@@ -42,6 +43,14 @@ func init() {
 		EmbedFolder: &assetsFolder,
 		Root:        "assets/images",
 	}
+
+	keys := map[string][]ebiten.Key{
+		"up":    {ebiten.KeyArrowUp, ebiten.KeyW},
+		"down":  {ebiten.KeyArrowDown, ebiten.KeyS},
+		"right": {ebiten.KeyArrowRight, ebiten.KeyD},
+		"left":  {ebiten.KeyArrowLeft, ebiten.KeyA},
+	}
+	input.Init(keys)
 
 	player = new(entities.Player)
 	player.Init(levels, &entityOptions)
