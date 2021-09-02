@@ -15,7 +15,7 @@ func IsPressed(action string) bool {
 		return false
 	}
 	for _, k := range keys {
-		if p := ebiten.IsKeyPressed(k); p {
+		if ebiten.IsKeyPressed(k) {
 			return true
 		}
 	}
