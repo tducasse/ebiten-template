@@ -552,7 +552,7 @@
 								{ "__identifier": "Float", "__value": 2, "__type": "Float", "defUid": 20, "realEditorValues": [] },
 								{ "__identifier": "Boolean", "__value": true, "__type": "Bool", "defUid": 21, "realEditorValues": [] },
 								{ "__identifier": "String", "__value": "something", "__type": "String", "defUid": 22, "realEditorValues": [] },
-								{ "__identifier": "Multilines", "__value": "a long\ntext", "__type": "String", "defUid": 23, "realEditorValues": [] },
+								{ "__identifier": "Multilines", "__value": "a long text", "__type": "String", "defUid": 23, "realEditorValues": [] },
 								{
 									"__identifier": "FilePath",
 									"__value": "sample.ldtk",
@@ -891,12 +891,36 @@
 								{ "__identifier": "Float", "__value": 2, "__type": "Float", "defUid": 20, "realEditorValues": [] },
 								{ "__identifier": "Boolean", "__value": true, "__type": "Bool", "defUid": 21, "realEditorValues": [] },
 								{ "__identifier": "String", "__value": "something", "__type": "String", "defUid": 22, "realEditorValues": [] },
-								{ "__identifier": "Multilines", "__value": "a long\ntext", "__type": "String", "defUid": 23, "realEditorValues": [] },
+								{ "__identifier": "Multilines", "__value": "a long text", "__type": "String", "defUid": 23, "realEditorValues": [] },
 								{ "__identifier": "FilePath", "__value": null, "__type": "FilePath", "defUid": 24, "realEditorValues": [] },
 								{ "__identifier": "Color", "__value": "#C45B5B", "__type": "Color", "defUid": 25, "realEditorValues": [] },
-								{ "__identifier": "Enum", "__value": null, "__type": "LocalEnum.Enum", "defUid": 27, "realEditorValues": [] },
-								{ "__identifier": "Point", "__value": null, "__type": "Point", "defUid": 28, "realEditorValues": [] },
-								{ "__identifier": "ArrayInt", "__value": [], "__type": "Array<Int>", "defUid": 29, "realEditorValues": [] }
+								{
+									"__identifier": "Enum",
+									"__value": "Two",
+									"__type": "LocalEnum.Enum",
+									"defUid": 27,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["Two"]
+									}]
+								},
+								{
+									"__identifier": "Point",
+									"__value": { "cx": 5, "cy": 3 },
+									"__type": "Point",
+									"defUid": 28,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["5,3"]
+									}]
+								},
+								{
+									"__identifier": "ArrayInt",
+									"__value": [1],
+									"__type": "Array<Int>",
+									"defUid": 29,
+									"realEditorValues": [{ "id": "V_Int", "params": [1] }]
+								}
 							]
 						}
 					]
