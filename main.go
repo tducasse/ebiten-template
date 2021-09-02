@@ -8,14 +8,28 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
+	"github.com/tducasse/ebiten-template/camera"
 	"github.com/tducasse/ebiten-template/entities"
 	"github.com/tducasse/ebiten-template/input"
 	"github.com/tducasse/ebiten-template/ldtk"
 )
 
+const (
+	screenWidth  = 256
+	screenHeight = 144
+	windowScale  = 4
+)
+
+const (
+	worldWidth  = 512
+	worldHeight = 512
+)
+
 var errQuit = errors.New("quit")
 
 type Game struct {
+	Camera *camera.Camera
+	World  *ebiten.Image
 }
 
 //go:embed assets/*
@@ -61,19 +75,36 @@ func (game *Game) Update() error {
 		return errQuit
 	}
 	player.Update()
+	game.Camera.Follow.W, game.Camera.Follow.H = player.Sprite.CurrentFrame.Image.Size()
+	game.Camera.X, game.Camera.Y = player.X, player.Y
+
+	if ebiten.IsKeyPressed(ebiten.KeyAlt) && inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
+		toggleFullscreen()
+	}
 	return nil
 }
 
 func (game *Game) Draw(screen *ebiten.Image) {
-	levels.Draw(screen)
-	player.Draw(screen)
+	game.World.Clear()
+	levels.Draw(game.World)
+	player.Draw(game.World)
+
+	game.Camera.Draw(game.World, screen)
 }
 
-func (game *Game) Layout(w, h int) (int, int) { return 256, 144 }
+func (game *Game) Layout(w, h int) (int, int) { return screenWidth, screenHeight }
+
+func toggleFullscreen() {
+	ebiten.SetFullscreen(!ebiten.IsFullscreen())
+}
 
 func main() {
-	ebiten.SetWindowSize(1024, 576)
-	if err := ebiten.RunGame(&Game{}); err != nil && err != errQuit {
+	g := &Game{
+		Camera: camera.Init(screenWidth, screenHeight),
+		World:  ebiten.NewImage(worldWidth, worldHeight),
+	}
+	ebiten.SetWindowSize(screenWidth*windowScale, screenHeight*windowScale)
+	if err := ebiten.RunGame(g); err != nil && err != errQuit {
 		log.Fatal(err)
 	}
 }
