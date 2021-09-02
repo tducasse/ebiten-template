@@ -139,9 +139,10 @@ func (anim *Animation) Update() {
 		}
 		anim.CurrentFrameIdx = newFrameIdx
 		anim.FrameCounter = 0
+	} else {
+		anim.CurrentFrame = anim.Frames[anim.CurrentFrameIdx]
+		anim.FrameCounter += (1.0 / 60.0) * 1000
 	}
-	anim.CurrentFrame = anim.Frames[anim.CurrentFrameIdx]
-	anim.FrameCounter += (1.0 / 60.0) * 1000
 }
 
 func (anim *Animation) Draw(x float64, y float64, screen *ebiten.Image) {
