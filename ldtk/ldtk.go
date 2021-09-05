@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"image"
 	"log"
+	"math"
 	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -16,6 +17,11 @@ type Tile struct {
 	Src  [2]int `json:"src"`
 	Type int    `json:"t"`
 	Flip int    `json:"f"`
+}
+
+type IntGridTile struct {
+	Coord int `json:"coordId"`
+	Value int `json:"v"`
 }
 
 type Entity struct {
@@ -38,16 +44,16 @@ type Field struct {
 }
 
 type Layer struct {
-	ID             string    `json:"__identifier"`
-	Type           string    `json:"__type"`
-	Entities       []*Entity `json:"entityInstances"`
-	Size           int       `json:"__gridSize"`
-	Width          int       `json:"cWid"`
-	Height         int       `json:"cHei"`
-	AutoLayerTiles []*Tile   `json:"autoLayerTiles"`
-	GridTiles      []*Tile   `json:"gridTiles"`
-	Tileset        string    `json:"__tilesetRelPath"`
-	IntGridCSV     []int     `json:"intGridCSV"`
+	ID             string         `json:"__identifier"`
+	Type           string         `json:"__type"`
+	Entities       []*Entity      `json:"entityInstances"`
+	Size           int            `json:"__gridSize"`
+	Width          int            `json:"__cWid"`
+	Height         int            `json:"__cHei"`
+	AutoLayerTiles []*Tile        `json:"autoLayerTiles"`
+	GridTiles      []*Tile        `json:"gridTiles"`
+	Tileset        string         `json:"__tilesetRelPath"`
+	IntGrid        []*IntGridTile `json:"intGrid"`
 	Tiles          map[int]*ebiten.Image
 }
 
@@ -75,6 +81,10 @@ type Options struct {
 	Aseprite bool
 	// the root path to the map assets (ltdk and png)
 	Root string
+	// LDtk int grid values for which we set up collisions
+	CollidesWith map[int]bool
+	// this is called every time we encounter a tile we should set up for
+	OnCollisionAdd func(x float64, y float64, w float64, h float64)
 }
 
 func Load(path string, opt *Options) (*Ldtk, error) {
@@ -92,6 +102,7 @@ func Load(path string, opt *Options) (*Ldtk, error) {
 		level.PrepareLevel(*opt)
 	}
 	ldtkMap.Active = ldtkMap.Levels[0]
+	ldtkMap.Active.MakeCollisions(*opt)
 	return &ldtkMap, nil
 }
 
@@ -149,6 +160,27 @@ func (layer *Layer) MakeTiles(tileLayer []*Tile, opt Options) {
 				),
 			).(*ebiten.Image)
 			layer.Tiles[tileData.Type] = tile
+		}
+	}
+}
+
+func (level *Level) MakeCollisions(opt Options) {
+	for _, layer := range level.Layers {
+		if len(layer.IntGrid) > 0 {
+			layer.MakeCollisions(layer.IntGrid, opt)
+		}
+	}
+}
+
+func (layer *Layer) MakeCollisions(intGridTiles []*IntGridTile, opt Options) {
+	for _, tile := range intGridTiles {
+		if opt.CollidesWith != nil {
+			if val, ok := opt.CollidesWith[tile.Value]; ok && val {
+				var x, y float64
+				y = math.Floor(float64(tile.Coord) / float64(layer.Width))
+				x = float64(tile.Coord) - y*float64(layer.Width)
+				opt.OnCollisionAdd(x*float64(layer.Size), y*float64(layer.Size), float64(layer.Size), float64(layer.Size))
+			}
 		}
 	}
 }

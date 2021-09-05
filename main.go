@@ -9,6 +9,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/tducasse/ebiten-template/camera"
+	"github.com/tducasse/ebiten-template/collision"
 	"github.com/tducasse/ebiten-template/entities"
 	"github.com/tducasse/ebiten-template/input"
 	"github.com/tducasse/ebiten-template/ldtk"
@@ -28,8 +29,9 @@ const (
 var errQuit = errors.New("quit")
 
 type Game struct {
-	Camera *camera.Camera
-	World  *ebiten.Image
+	Camera         *camera.Camera
+	World          *ebiten.Image
+	CollisionWorld *collision.World
 }
 
 //go:embed assets/*
@@ -39,7 +41,7 @@ var levels *ldtk.Ldtk
 
 var player *entities.Player
 
-func init() {
+func (g *Game) Init() {
 	var err error
 	levels, err = ldtk.Load(
 		"sample.ldtk",
@@ -47,6 +49,10 @@ func init() {
 			Aseprite:    true,
 			EmbedFolder: &assetsFolder,
 			Root:        "assets/maps",
+			CollidesWith: map[int]bool{
+				0: true,
+			},
+			OnCollisionAdd: g.CollisionWorld.AddNewBox,
 		},
 	)
 	if err != nil {
@@ -56,6 +62,7 @@ func init() {
 	entityOptions := entities.EntityOptions{
 		EmbedFolder: &assetsFolder,
 		Root:        "assets/images",
+		World:       g.CollisionWorld,
 	}
 
 	keys := map[string][]ebiten.Key{
@@ -100,9 +107,11 @@ func toggleFullscreen() {
 
 func main() {
 	g := &Game{
-		Camera: camera.Init(screenWidth, screenHeight),
-		World:  ebiten.NewImage(worldWidth, worldHeight),
+		Camera:         camera.Init(screenWidth, screenHeight),
+		World:          ebiten.NewImage(worldWidth, worldHeight),
+		CollisionWorld: collision.MakeWorld(),
 	}
+	g.Init()
 	ebiten.SetWindowSize(screenWidth*windowScale, screenHeight*windowScale)
 	if err := ebiten.RunGame(g); err != nil && err != errQuit {
 		log.Fatal(err)

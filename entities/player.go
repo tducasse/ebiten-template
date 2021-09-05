@@ -6,15 +6,20 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/tducasse/ebiten-template/aseprite"
+	"github.com/tducasse/ebiten-template/collision"
 	"github.com/tducasse/ebiten-template/input"
 	"github.com/tducasse/ebiten-template/ldtk"
 )
 
 type Player struct {
-	X      float64
-	Y      float64
-	Sprite *aseprite.Animation
-	Speed  float64
+	X              float64
+	Y              float64
+	W              float64
+	H              float64
+	Sprite         *aseprite.Animation
+	Speed          float64
+	World          *collision.World
+	CollisionShape *collision.Box
 }
 
 func (p *Player) Init(levels *ldtk.Ldtk, opt *EntityOptions) {
@@ -25,6 +30,8 @@ func (p *Player) Init(levels *ldtk.Ldtk, opt *EntityOptions) {
 	p.Speed = 100
 	p.X = float64(playerEntity.Px[0])
 	p.Y = float64(playerEntity.Px[1])
+	p.W = float64(playerEntity.Width)
+	p.H = float64(playerEntity.Height)
 	p.Sprite = aseprite.Load(
 		"player.json",
 		&aseprite.Options{
@@ -35,6 +42,9 @@ func (p *Player) Init(levels *ldtk.Ldtk, opt *EntityOptions) {
 		p,
 	)
 	p.Sprite.OnLoop(onAnimLoop)
+	p.World = opt.World
+	p.CollisionShape = collision.MakeBox(p.X, p.Y, p.W, p.H)
+	p.World.Add(p.CollisionShape)
 }
 
 func onAnimLoop(player interface{}, anim *aseprite.Animation) {
@@ -71,11 +81,12 @@ func (p *Player) Move() {
 
 	if dx != 0 || dy != 0 {
 		p.Sprite.SetTag("walk")
+		x, y, _ := p.World.Move(p.CollisionShape, dx, dy, nil)
+		p.X = x
+		p.Y = y
 	} else {
 		p.Sprite.SetTag("idle")
 	}
-	p.X += dx
-	p.Y += dy
 }
 
 func (p *Player) Update() {
