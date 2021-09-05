@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"image"
 	"log"
+	"sort"
 
 	"github.com/hajimehoshi/ebiten/v2"
 )
@@ -69,6 +70,7 @@ func (anim *Animation) Init(aseData map[string]interface{}, tag string) {
 	anim.GetFrames(frames)
 	anim.CurrentTag = anim.Tags[tag]
 	anim.CurrentFrameIdx = anim.CurrentTag.From
+
 }
 
 func (anim *Animation) OnLoop(callback OnLoopType) {
@@ -107,7 +109,13 @@ func (anim *Animation) GetTags(meta map[string]interface{}) {
 }
 
 func (anim *Animation) GetFrames(frames map[string]interface{}) {
-	for _, val := range frames {
+	keys := make([]string, 0, len(frames))
+	for k := range frames {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	for _, k := range keys {
+		val := frames[k]
 		frameItem := val.(map[string]interface{})
 		frame := frameItem["frame"].(map[string]interface{})
 		x := int(frame["x"].(float64))
