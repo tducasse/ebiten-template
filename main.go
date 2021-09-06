@@ -3,7 +3,6 @@ package main
 import (
 	"embed"
 	"errors"
-	"image/color"
 	_ "image/png"
 	"log"
 
@@ -11,9 +10,8 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/tducasse/ebiten-template/camera"
 	"github.com/tducasse/ebiten-template/collision"
-	"github.com/tducasse/ebiten-template/entities"
-	"github.com/tducasse/ebiten-template/input"
-	"github.com/tducasse/ebiten-template/ldtk"
+	"github.com/tducasse/ebiten-template/manager"
+	"github.com/tducasse/ebiten-template/scenes"
 )
 
 const (
@@ -29,91 +27,52 @@ const (
 
 var errQuit = errors.New("quit")
 
-type Game struct {
-	Camera         *camera.Camera
-	World          *ebiten.Image
-	CollisionWorld *collision.World
-}
+type Game struct{}
+
+var m *manager.Manager
+var g *Game
 
 //go:embed assets/*
 var assetsFolder embed.FS
-
-var levels *ldtk.Ldtk
-
-var player *entities.Player
-
-func (g *Game) Init() {
-	var err error
-	levels, err = ldtk.Load(
-		"sample.ldtk",
-		&ldtk.Options{
-			Aseprite:    true,
-			EmbedFolder: &assetsFolder,
-			Root:        "assets/maps",
-			CollidesWith: map[int]bool{
-				0: true,
-			},
-			OnCollisionAdd: g.CollisionWorld.AddNewBox,
-		},
-	)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	entityOptions := entities.EntityOptions{
-		EmbedFolder: &assetsFolder,
-		Root:        "assets/images",
-		World:       g.CollisionWorld,
-	}
-
-	keys := map[string][]ebiten.Key{
-		"up":    {ebiten.KeyArrowUp, ebiten.KeyW},
-		"down":  {ebiten.KeyArrowDown, ebiten.KeyS},
-		"right": {ebiten.KeyArrowRight, ebiten.KeyD},
-		"left":  {ebiten.KeyArrowLeft, ebiten.KeyA},
-	}
-	input.Init(keys)
-
-	player = new(entities.Player)
-	player.Init(levels, &entityOptions)
-}
 
 func (game *Game) Update() error {
 	if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 		return errQuit
 	}
-	player.Update()
-	game.Camera.Follow.W, game.Camera.Follow.H = player.Sprite.CurrentFrame.Image.Size()
-	game.Camera.X, game.Camera.Y = player.X, player.Y
-
 	if ebiten.IsKeyPressed(ebiten.KeyAlt) && inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
 		toggleFullscreen()
 	}
-	return nil
+	return m.Update()
 }
 
 func (game *Game) Draw(screen *ebiten.Image) {
-	game.World.Clear()
-	screen.Fill(color.RGBA{R: 10, G: 10, B: 30, A: 255})
-	levels.Draw(game.World)
-	player.Draw(game.World)
-
-	game.Camera.Draw(game.World, screen)
+	m.Draw(screen)
 }
 
-func (game *Game) Layout(w, h int) (int, int) { return screenWidth, screenHeight }
+func (game *Game) Layout(w, h int) (int, int) {
+	return screenWidth, screenHeight
+}
 
 func toggleFullscreen() {
 	ebiten.SetFullscreen(!ebiten.IsFullscreen())
 }
 
 func main() {
-	g := &Game{
+	m = manager.MakeManager(map[string]*manager.Scene{
+		"menu": scenes.MenuScene,
+		"game": scenes.GameScene,
+	}, "menu")
+
+	g = &Game{}
+
+	scenes.Context = &scenes.ContextType{
 		Camera:         camera.Init(screenWidth, screenHeight),
 		World:          ebiten.NewImage(worldWidth, worldHeight),
 		CollisionWorld: collision.MakeWorld(),
+		AssetsFolder:   &assetsFolder,
+		Manager:        m,
 	}
-	g.Init()
+
 	ebiten.SetWindowSize(screenWidth*windowScale, screenHeight*windowScale)
 	ebiten.SetWindowResizable(true)
 	if err := ebiten.RunGame(g); err != nil && err != errQuit {
