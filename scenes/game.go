@@ -69,8 +69,7 @@ var GameScene *manager.Scene = &manager.Scene{
 
 	// Draw runs once per frame
 	Draw: func(screen *ebiten.Image) {
-		Context.World.Clear()
-		screen.Fill(color.RGBA{R: 10, G: 10, B: 30, A: 255})
+		Context.World.Fill(color.RGBA{R: 10, G: 10, B: 30, A: 255})
 		levels.Draw(Context.World)
 		player.Draw(Context.World)
 		Context.Camera.Draw(Context.World, screen)
