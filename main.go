@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"errors"
+	"image/color"
 	_ "image/png"
 	"log"
 
@@ -93,6 +94,7 @@ func (game *Game) Update() error {
 
 func (game *Game) Draw(screen *ebiten.Image) {
 	game.World.Clear()
+	screen.Fill(color.RGBA{R: 10, G: 10, B: 30, A: 255})
 	levels.Draw(game.World)
 	player.Draw(game.World)
 
@@ -113,6 +115,7 @@ func main() {
 	}
 	g.Init()
 	ebiten.SetWindowSize(screenWidth*windowScale, screenHeight*windowScale)
+	ebiten.SetWindowResizable(true)
 	if err := ebiten.RunGame(g); err != nil && err != errQuit {
 		log.Fatal(err)
 	}
