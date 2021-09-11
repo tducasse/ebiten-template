@@ -5,11 +5,11 @@ import (
 	"math"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/tducasse/ebiten-template/aseprite"
-	"github.com/tducasse/ebiten-template/collisions"
-	"github.com/tducasse/ebiten-template/input"
-	"github.com/tducasse/ebiten-template/ldtk"
-	"github.com/tducasse/ebiten-template/signals"
+	aseprite "github.com/tducasse/ebiten-aseprite"
+	collisions "github.com/tducasse/ebiten-collisions"
+	input "github.com/tducasse/ebiten-input"
+	ldtk "github.com/tducasse/ebiten-ldtk"
+	signals "github.com/tducasse/ebiten-signals"
 )
 
 type Player struct {

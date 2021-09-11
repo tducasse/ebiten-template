@@ -7,7 +7,7 @@ import (
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/tducasse/ebiten-template/collisions"
+	collisions "github.com/tducasse/ebiten-collisions"
 )
 
 type EntityOptions struct {

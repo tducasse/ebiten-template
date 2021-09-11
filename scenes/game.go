@@ -6,11 +6,11 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	input "github.com/tducasse/ebiten-input"
+	ldtk "github.com/tducasse/ebiten-ldtk"
+	manager "github.com/tducasse/ebiten-manager"
+	signals "github.com/tducasse/ebiten-signals"
 	"github.com/tducasse/ebiten-template/entities"
-	"github.com/tducasse/ebiten-template/input"
-	"github.com/tducasse/ebiten-template/ldtk"
-	"github.com/tducasse/ebiten-template/manager"
-	"github.com/tducasse/ebiten-template/signals"
 )
 
 var levels *ldtk.Ldtk

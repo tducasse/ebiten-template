@@ -4,7 +4,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
-	"github.com/tducasse/ebiten-template/manager"
+	manager "github.com/tducasse/ebiten-manager"
 )
 
 var MenuScene *manager.Scene = &manager.Scene{

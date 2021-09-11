@@ -4,9 +4,9 @@ import (
 	"embed"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/tducasse/ebiten-template/camera"
-	"github.com/tducasse/ebiten-template/collisions"
-	"github.com/tducasse/ebiten-template/manager"
+	camera "github.com/tducasse/ebiten-camera"
+	collisions "github.com/tducasse/ebiten-collisions"
+	manager "github.com/tducasse/ebiten-manager"
 )
 
 type ContextType struct {
