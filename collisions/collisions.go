@@ -1,4 +1,4 @@
-package collision
+package collisions
 
 import (
 	"image/color"

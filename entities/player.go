@@ -6,7 +6,7 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/tducasse/ebiten-template/aseprite"
-	"github.com/tducasse/ebiten-template/collision"
+	"github.com/tducasse/ebiten-template/collisions"
 	"github.com/tducasse/ebiten-template/input"
 	"github.com/tducasse/ebiten-template/ldtk"
 	"github.com/tducasse/ebiten-template/signals"
@@ -19,8 +19,8 @@ type Player struct {
 	H              float64
 	Sprite         *aseprite.Animation
 	Speed          float64
-	World          *collision.World
-	CollisionShape *collision.Box
+	World          *collisions.World
+	CollisionShape *collisions.Box
 }
 
 func (p *Player) Init(levels *ldtk.Ldtk, opt *EntityOptions) {
@@ -44,7 +44,7 @@ func (p *Player) Init(levels *ldtk.Ldtk, opt *EntityOptions) {
 	)
 	p.Sprite.OnLoop(onAnimLoop)
 	p.World = opt.World
-	p.CollisionShape = collision.MakeBox(p.X, p.Y, p.W, p.H)
+	p.CollisionShape = collisions.MakeBox(p.X, p.Y, p.W, p.H)
 	p.World.Add(p.CollisionShape)
 }
 

@@ -7,13 +7,13 @@ import (
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/tducasse/ebiten-template/collision"
+	"github.com/tducasse/ebiten-template/collisions"
 )
 
 type EntityOptions struct {
 	EmbedFolder *embed.FS
 	Root        string
-	World       *collision.World
+	World       *collisions.World
 }
 
 func NewImageFromEmbed(path string, folder *embed.FS) *ebiten.Image {

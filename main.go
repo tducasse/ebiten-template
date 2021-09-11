@@ -9,7 +9,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/tducasse/ebiten-template/camera"
-	"github.com/tducasse/ebiten-template/collision"
+	"github.com/tducasse/ebiten-template/collisions"
 	"github.com/tducasse/ebiten-template/manager"
 	"github.com/tducasse/ebiten-template/scenes"
 )
@@ -68,7 +68,7 @@ func main() {
 	scenes.Context = &scenes.ContextType{
 		Camera:         camera.Init(screenWidth, screenHeight),
 		World:          ebiten.NewImage(worldWidth, worldHeight),
-		CollisionWorld: collision.MakeWorld(),
+		CollisionWorld: collisions.MakeWorld(),
 		AssetsFolder:   &assetsFolder,
 		Manager:        m,
 	}
