@@ -5,15 +5,19 @@ import (
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/tducasse/ebiten-template/entities"
 	"github.com/tducasse/ebiten-template/input"
 	"github.com/tducasse/ebiten-template/ldtk"
 	"github.com/tducasse/ebiten-template/manager"
+	"github.com/tducasse/ebiten-template/signals"
 )
 
 var levels *ldtk.Ldtk
 
 var player *entities.Player
+
+var message string
 
 var GameScene *manager.Scene = &manager.Scene{
 
@@ -62,6 +66,13 @@ var GameScene *manager.Scene = &manager.Scene{
 		Context.Camera.Follow.W, Context.Camera.Follow.H = player.Sprite.CurrentFrame.Image.Size()
 		Context.Camera.X, Context.Camera.Y = player.X, player.Y
 
+		signals.Connect("collided", func(i []interface{}) {
+			message = ""
+			for _, part := range i {
+				message += part.(string) + " "
+			}
+		})
+
 		setReady()
 
 		return nil
@@ -72,6 +83,9 @@ var GameScene *manager.Scene = &manager.Scene{
 		Context.World.Fill(color.RGBA{R: 10, G: 10, B: 30, A: 255})
 		levels.Draw(Context.World)
 		player.Draw(Context.World)
+		if message != "" {
+			ebitenutil.DebugPrint(Context.World, message)
+		}
 		Context.Camera.Draw(Context.World, screen)
 	},
 }

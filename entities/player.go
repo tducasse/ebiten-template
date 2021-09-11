@@ -9,6 +9,7 @@ import (
 	"github.com/tducasse/ebiten-template/collision"
 	"github.com/tducasse/ebiten-template/input"
 	"github.com/tducasse/ebiten-template/ldtk"
+	"github.com/tducasse/ebiten-template/signals"
 )
 
 type Player struct {
@@ -81,7 +82,11 @@ func (p *Player) Move() {
 
 	if dx != 0 || dy != 0 {
 		p.Sprite.SetTag("walk")
-		x, y, _ := p.World.Move(p.CollisionShape, dx, dy, nil)
+		x, y, collisions := p.World.Move(p.CollisionShape, dx, dy, nil)
+		if len(collisions) > 0 {
+			params := []interface{}{"we", "hit"}
+			signals.Emit("collided", params)
+		}
 		p.X = x
 		p.Y = y
 	} else {
