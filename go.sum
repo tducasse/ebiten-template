@@ -265,6 +265,8 @@ github.com/tducasse/ebiten-collisions v0.0.0-20210911081002-ee23037f3d00 h1:MeRg
 github.com/tducasse/ebiten-collisions v0.0.0-20210911081002-ee23037f3d00/go.mod h1:uvsUFFioS9OJfYYPyDWnFT0tPUS+xN9G6hHgNHhBJQQ=
 github.com/tducasse/ebiten-input v0.0.0-20210911070653-d11e9b0ed4e6 h1:aRQBsnx1lcsK/rTyy1neJoz4yvhammi5B+B9iM4f6/0=
 github.com/tducasse/ebiten-input v0.0.0-20210911070653-d11e9b0ed4e6/go.mod h1:/FcUPax/6GdlHxAFkaQfrsrGNN+yPU+tIuKNp0jvjFs=
+github.com/tducasse/ebiten-input v0.0.0-20210911080949-b44426771b1a h1:DMYWp/ewlUTwDTvaGBDFa1zBkvEB3L0FimmR1aRJtn4=
+github.com/tducasse/ebiten-input v0.0.0-20210911080949-b44426771b1a/go.mod h1:/FcUPax/6GdlHxAFkaQfrsrGNN+yPU+tIuKNp0jvjFs=
 github.com/tducasse/ebiten-ldtk v0.0.0-20210911065849-6c70eb2728af h1:ulB5GoE3vJ4sTPqUBxgW3/zsBuZejilpC8oDdeKhIQc=
 github.com/tducasse/ebiten-ldtk v0.0.0-20210911065849-6c70eb2728af/go.mod h1:OYv98FhMg4BeIyErcAwx1uShZ21i8ddq3eOIGznOyZY=
 github.com/tducasse/ebiten-ldtk v0.0.0-20210911072203-cc0bfd4c8c63 h1:TZDXtW+Y7d1TSs2aKZMSEBatER7Renw/KgSy/4qYS6Q=
