@@ -259,6 +259,8 @@ github.com/tducasse/ebiten-aseprite v0.0.0-20210911080958-5b926af9d020 h1:zPQNmX
 github.com/tducasse/ebiten-aseprite v0.0.0-20210911080958-5b926af9d020/go.mod h1:rzB8LhuZjpcUp4c/MqDERyuGXI6PHYfdtl3Se0J/+54=
 github.com/tducasse/ebiten-camera v0.0.0-20210911070521-c3f9c781df61 h1:2tNsl90kMSgUXY/72MNFfdu2mmsBJVJiPrF9f+7cqAs=
 github.com/tducasse/ebiten-camera v0.0.0-20210911070521-c3f9c781df61/go.mod h1:L+ktPAVcFyfMyzZo/7qPnPBVzFVh7KpL15eutncyXt0=
+github.com/tducasse/ebiten-camera v0.0.0-20210911080945-9a1eb3ff38d0 h1:DtaVGSO+nRoIyTCJZo/T/clE7f+tGTQIAtGAzvT501A=
+github.com/tducasse/ebiten-camera v0.0.0-20210911080945-9a1eb3ff38d0/go.mod h1:L+ktPAVcFyfMyzZo/7qPnPBVzFVh7KpL15eutncyXt0=
 github.com/tducasse/ebiten-collisions v0.0.0-20210911065021-ac4f8af1d043 h1:YMY6dYdpL+6C3uKR5ZlkJP5TZ25YmApkI5em0elQ7bg=
 github.com/tducasse/ebiten-collisions v0.0.0-20210911065021-ac4f8af1d043/go.mod h1:uvsUFFioS9OJfYYPyDWnFT0tPUS+xN9G6hHgNHhBJQQ=
 github.com/tducasse/ebiten-collisions v0.0.0-20210911081002-ee23037f3d00 h1:MeRgmYiJ5Q5UopBmZc/szHnRIEbF1lNO6XwChL8fdg0=
