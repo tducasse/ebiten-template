@@ -269,6 +269,8 @@ github.com/tducasse/ebiten-manager v0.0.0-20210911070208-928daf2539e2 h1:kYFg29g
 github.com/tducasse/ebiten-manager v0.0.0-20210911070208-928daf2539e2/go.mod h1:uEWuLHQxzELFfxo0r28vw0YTLg9mxKSajBnk92Z/E/I=
 github.com/tducasse/ebiten-signals v0.0.0-20210911070832-3194d218e4aa h1:Q9vgC9JIumUSXXK0B+gtspRkD/ZS7TuHlT2gmgRaa2Q=
 github.com/tducasse/ebiten-signals v0.0.0-20210911070832-3194d218e4aa/go.mod h1:10IWIcRSAcxlzz2aBbSCabFIJ6IEttimae0KJa3B4H4=
+github.com/tducasse/ebiten-signals v0.0.0-20210911080937-8eea23d4a7f8 h1:eLIC04/1l/7GlbQPO5tshEtYB1XFSqs/53bAittFIw8=
+github.com/tducasse/ebiten-signals v0.0.0-20210911080937-8eea23d4a7f8/go.mod h1:10IWIcRSAcxlzz2aBbSCabFIJ6IEttimae0KJa3B4H4=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20170815181823-89b8d40f7ca8/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=
 github.com/urfave/cli v1.20.0/go.mod h1:70zkFmudgCuE/ngEzBv17Jvp/497gISqfk5gWijbERA=
 github.com/urfave/cli v1.22.1/go.mod h1:Gos4lmkARVdJ6EkW0WaNv/tZAAMe9V7XWyB60NtXRu0=
