@@ -271,6 +271,8 @@ github.com/tducasse/ebiten-ldtk v0.0.0-20210911072203-cc0bfd4c8c63 h1:TZDXtW+Y7d
 github.com/tducasse/ebiten-ldtk v0.0.0-20210911072203-cc0bfd4c8c63/go.mod h1:OYv98FhMg4BeIyErcAwx1uShZ21i8ddq3eOIGznOyZY=
 github.com/tducasse/ebiten-manager v0.0.0-20210911070208-928daf2539e2 h1:kYFg29gPkdLgLQ4LYILOXTnfUl3QHoOOK8A+/aQFFZc=
 github.com/tducasse/ebiten-manager v0.0.0-20210911070208-928daf2539e2/go.mod h1:uEWuLHQxzELFfxo0r28vw0YTLg9mxKSajBnk92Z/E/I=
+github.com/tducasse/ebiten-manager v0.0.0-20210911081005-44dc956d0d8f h1:6pnbRpdiunHaKo+UPEawHI1n/QK+e9Kq4UiTllupBYI=
+github.com/tducasse/ebiten-manager v0.0.0-20210911081005-44dc956d0d8f/go.mod h1:uEWuLHQxzELFfxo0r28vw0YTLg9mxKSajBnk92Z/E/I=
 github.com/tducasse/ebiten-signals v0.0.0-20210911070832-3194d218e4aa h1:Q9vgC9JIumUSXXK0B+gtspRkD/ZS7TuHlT2gmgRaa2Q=
 github.com/tducasse/ebiten-signals v0.0.0-20210911070832-3194d218e4aa/go.mod h1:10IWIcRSAcxlzz2aBbSCabFIJ6IEttimae0KJa3B4H4=
 github.com/tducasse/ebiten-signals v0.0.0-20210911080937-8eea23d4a7f8 h1:eLIC04/1l/7GlbQPO5tshEtYB1XFSqs/53bAittFIw8=
