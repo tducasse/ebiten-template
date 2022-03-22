@@ -249,6 +249,8 @@ github.com/stretchr/testify v1.4.0/go.mod h1:j7eGeouHqKxXV5pUuKE4zz7dFj8WfuZ+81P
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/tducasse/ebiten-aseprite v0.0.0-20210911065443-b0d91fdec8d3 h1:fAhDlRpNna1Qg9IcYTpXx+B2rqPd1Ck65T8d3BfVybU=
 github.com/tducasse/ebiten-aseprite v0.0.0-20210911065443-b0d91fdec8d3/go.mod h1:rzB8LhuZjpcUp4c/MqDERyuGXI6PHYfdtl3Se0J/+54=
+github.com/tducasse/ebiten-aseprite v0.0.0-20210911080958-5b926af9d020 h1:zPQNmXMGxg20InrSZMuTgMGvAx8xgK3AuSSZe8dU7c4=
+github.com/tducasse/ebiten-aseprite v0.0.0-20210911080958-5b926af9d020/go.mod h1:rzB8LhuZjpcUp4c/MqDERyuGXI6PHYfdtl3Se0J/+54=
 github.com/tducasse/ebiten-camera v0.0.0-20210911070521-c3f9c781df61 h1:2tNsl90kMSgUXY/72MNFfdu2mmsBJVJiPrF9f+7cqAs=
 github.com/tducasse/ebiten-camera v0.0.0-20210911070521-c3f9c781df61/go.mod h1:L+ktPAVcFyfMyzZo/7qPnPBVzFVh7KpL15eutncyXt0=
 github.com/tducasse/ebiten-collisions v0.0.0-20210911065021-ac4f8af1d043 h1:YMY6dYdpL+6C3uKR5ZlkJP5TZ25YmApkI5em0elQ7bg=

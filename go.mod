@@ -6,7 +6,7 @@ require github.com/hajimehoshi/ebiten/v2 v2.1.6
 
 require (
 	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20210727001814-0db043d8d5be // indirect
-	github.com/tducasse/ebiten-aseprite v0.0.0-20210911065443-b0d91fdec8d3
+	github.com/tducasse/ebiten-aseprite v0.0.0-20210911080958-5b926af9d020
 	github.com/tducasse/ebiten-camera v0.0.0-20210911070521-c3f9c781df61
 	github.com/tducasse/ebiten-collisions v0.0.0-20210911065021-ac4f8af1d043
 	github.com/tducasse/ebiten-input v0.0.0-20210911070653-d11e9b0ed4e6
